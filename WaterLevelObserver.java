@@ -1,0 +1,8 @@
+import javax.swing.*;
+
+class WaterLevelObserver{
+	public void update(int waterLevel){
+		 
+	}
+
+}
