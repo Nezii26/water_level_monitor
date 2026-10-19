@@ -7,14 +7,14 @@ class Display extends WaterLevelObserver {
     private JLabel lblDisplay;
     
 
-    private static JFrame frame;
-    private static JPanel panel;
+    private JFrame frame;
+    private JPanel panel;
 
     Display(String id){
         this.id = id;
 		
        
-        if (frame == null) {
+        
             frame = new JFrame("Display");
             frame.setSize(300, 150);
             frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -22,7 +22,7 @@ class Display extends WaterLevelObserver {
 
             panel = new JPanel(new GridLayout(0, 1, 5, 5));
             frame.add(panel);
-        }
+        
 
         //label display
         lblDisplay = new JLabel(id + " --> Water Level", JLabel.CENTER);
@@ -36,6 +36,17 @@ class Display extends WaterLevelObserver {
     @Override
     public void update(int waterLevel) {
         lblDisplay.setText(id+"-->Water Level : "+waterLevel);
+        
+        if (waterLevel <= 25) {
+			panel.setBackground(new Color(76, 175, 80)); // Green
+		}else if(25 < waterLevel && waterLevel <= 50){
+			panel.setBackground(new Color(255, 235, 59)); // Yellow
+		}else if(50 < waterLevel && waterLevel <= 75){
+			panel.setBackground(new Color(255, 152, 0)); // Orange
+		}else if(75 < waterLevel && waterLevel <= 100){
+			panel.setBackground(new Color(244, 67, 54)); // Red
+		}
+        
     }
 
     @Override

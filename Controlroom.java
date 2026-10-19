@@ -14,14 +14,15 @@ class Controlroom extends JFrame{
     private ControlCollection crc;
 
     Controlroom() {
-        setTitle("Water_Level System");
-        setSize(350, 200);
+        setTitle("Water_Level Control");
+        setSize(450, 200);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 		
 		slider = new JSlider(0, 100, 0);
 		slider.setMajorTickSpacing(25);
         slider.setPaintLabels(true);
+        
         
         txtId = new JTextField();
         
@@ -47,33 +48,48 @@ class Controlroom extends JFrame{
 			public void actionPerformed(ActionEvent evt){
 				
 				String id = txtId.getText().trim();
-				int count = id.length();
 				
 				
-				
-								
-					String findId = id.substring(0,2);
+				if(id.isEmpty()){
 					
-					if(findId.equals("A0")){
-						crc.addwaterLevel(new Alarm(id));
-					}
-					if(findId.equals("D0")){
-						crc.addwaterLevel(new Display(id));
-					}
-					if(findId.equals("SM")){
-						crc.addwaterLevel(new SMSSender(id));	
-					}
-					if(findId.equals("S0")){
-						crc.addwaterLevel(new Splitter(id));
-					}
+					JOptionPane.showMessageDialog(null, "Please Enter ID & Get This Guide ,\n \n Alarm -> A0001 \n Display -> D0001 \n SMSsender -> SM001 \n Splitter -> S0001");
+					return;
+				
+				}else{
 					
-				
-				
-				
-				//crc.addwaterLevel(new Display("D002"));
-				
+					if(id.length() != 5){
+						
+						JOptionPane.showMessageDialog(null, "Your Id Length Invalid, Get This Guide ,\n \n Alarm -> A0001 \n Display -> D0001 \n SMSsender -> SM001 \n Splitter -> S0001");
+						return;
+						
+					}else{
+					
+						JOptionPane.showMessageDialog(null, "Added Successfully");
+						
+						int count = id.length();			
+						String findId = id.substring(0,2);
+						
+						if(findId.equals("A0")){
+							crc.addwaterLevel(new Alarm(id));
+						}
+						if(findId.equals("D0")){
+							crc.addwaterLevel(new Display(id));
+						}
+						if(findId.equals("SM")){
+							crc.addwaterLevel(new SMSSender(id));	
+						}
+						if(findId.equals("S0")){
+							crc.addwaterLevel(new Splitter(id));
+						}
+					}
+				}
+					
 			}
 		});
+		
+		
+		panel.setBackground(new Color(30, 144, 255));
+		slider.setForeground(new Color(255, 255, 255));
 		
 		
 
@@ -81,14 +97,29 @@ class Controlroom extends JFrame{
             int value = slider.getValue();
             crc.setWaterLevel(value);
             
+            if ( value <= 25) {
+				slider.setBackground(new Color(76, 175, 80)); // Green
+				
+			}else if(25 < value && value <= 50){
+				slider.setBackground(new Color(255, 235, 59)); // Yellow
+				
+			}else if(50 < value && value <= 75){
+				slider.setBackground(new Color(255, 152, 0)); // Orange
+				
+			}else if(75 < value && value <= 100){
+				slider.setBackground(new Color(244, 67, 54)); // Red
+	
+			}
 			
 
         });
         
-        
-        
-     
+       
+	
     }
+    
+   
+    
 }
 	
 	
@@ -100,7 +131,6 @@ class Controlroom extends JFrame{
 
 
 
-	
 	
 	
 	

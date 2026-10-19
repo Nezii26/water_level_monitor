@@ -7,6 +7,8 @@ class ControlCollection{
 	public void addwaterLevel(WaterLevelObserver waterLevel){
 		extendsArray();
 		waterLevelObserverArray[waterLevelObserverArray.length-1]=waterLevel;
+		
+		
 	}
 	
 	private void extendsArray(){
@@ -26,11 +28,5 @@ class ControlCollection{
 	}
 	
 	
-	//slider.addChangeListener(e -> {
-	//	int value = slider.getValue();
-	//	contControlCollection.setWaterLevel(value);
-	//});
-	
-	 
 	
 }

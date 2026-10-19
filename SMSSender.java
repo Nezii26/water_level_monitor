@@ -7,14 +7,14 @@ class SMSSender extends WaterLevelObserver {
     private JLabel lblSMSSender;
     
 
-    private static JFrame frame;
-    private static JPanel panel;
+    private JFrame frame;
+    private JPanel panel;
 
     SMSSender(String id){
         this.id = id;
 		
        
-        if (frame == null) {
+       
             frame = new JFrame("SMSSender");
             frame.setSize(300, 150);
             frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -22,7 +22,7 @@ class SMSSender extends WaterLevelObserver {
 
             panel = new JPanel(new GridLayout(0, 1, 5, 5));
             frame.add(panel);
-        }
+        
 
         //label sms
         lblSMSSender = new JLabel(id + " --> Water Level", JLabel.CENTER);
@@ -35,7 +35,26 @@ class SMSSender extends WaterLevelObserver {
 
     @Override
     public void update(int waterLevel) {
-        lblSMSSender.setText(id+"-->Sending SMS..."+ waterLevel);
+        //lblSMSSender.setText(id+"-->Sending SMS..."+ waterLevel);
+        
+        if (waterLevel <= 25) {
+			lblSMSSender.setText("<html>"+id+"-->Sending SMS <br>"+waterLevel+" WaterLevel is Normal"+"<html>" );			
+			panel.setBackground(new Color(76, 175, 80)); // Green
+			
+		}else if(25 < waterLevel && waterLevel <= 50){
+			panel.setBackground(new Color(255, 235, 59)); // Yellow
+			lblSMSSender.setText("<html>"+id+"-->Sending SMS <br>"+waterLevel+" WaterLevel is Moderate :) "+"<html>" );		
+			
+		}else if(50 < waterLevel && waterLevel <= 75){
+			panel.setBackground(new Color(255, 152, 0)); // Orange
+			lblSMSSender.setText("<html>"+id+"-->Sending SMS <br>"+waterLevel+" WaterLevel is High"+"<html>" );	
+			
+		}else if(75 < waterLevel && waterLevel <= 100){
+			panel.setBackground(new Color(244, 67, 54)); // Red
+			lblSMSSender.setText("<html>"+id+"-->Sending SMS <br>"+waterLevel+" WaterLevel is Critical :( "+"<html>" );	
+		}
+        
+        
     }
 
     @Override

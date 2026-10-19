@@ -7,14 +7,14 @@ class Splitter extends WaterLevelObserver {
     private JLabel lblSplitter;
     
 
-    private static JFrame frame;
-    private static JPanel panel;
+    private JFrame frame;
+    private JPanel panel;
 
     Splitter(String id) {
         this.id = id;
 		
       
-        if (frame == null) {
+        
             frame = new JFrame("Splitter");
             frame.setSize(300, 150);
             frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -23,7 +23,7 @@ class Splitter extends WaterLevelObserver {
 
             panel = new JPanel(new GridLayout(0, 1, 5, 5));
             frame.add(panel);
-        }
+        
 
         //label alarm
         lblSplitter = new JLabel(id + " --> Splitter Off", JLabel.CENTER);
@@ -41,6 +41,17 @@ class Splitter extends WaterLevelObserver {
         } else {
             lblSplitter.setText(id + " --> Splitter Close");
         }
+        
+        if (waterLevel <= 25) {
+			panel.setBackground(new Color(76, 175, 80)); // Green
+		}else if(25 < waterLevel && waterLevel <= 50){
+			panel.setBackground(new Color(255, 235, 59)); // Yellow
+		}else if(50 < waterLevel && waterLevel <= 75){
+			panel.setBackground(new Color(255, 152, 0)); // Orange
+		}else if(75 < waterLevel && waterLevel <= 100){
+			panel.setBackground(new Color(244, 67, 54)); // Red
+		}
+        
     }
 
     @Override
