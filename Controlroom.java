@@ -13,6 +13,18 @@ class Controlroom extends JFrame{
 	private static JFrame frame;
     private ControlCollection crc;
 
+
+	String[] idArray = new String[0];
+
+	public void addToIdArray(String id){
+		String[] temp = new String[idArray.length+1];
+		for(int i=0 ; i<idArray.length ; i++){
+			temp[i]=idArray[i];
+		}
+		temp[idArray.length]=id;
+		idArray=temp;
+	}
+
     Controlroom() {
         setTitle("Water_Level Control");
         setSize(450, 200);
@@ -42,13 +54,34 @@ class Controlroom extends JFrame{
         add(panel, BorderLayout.CENTER);
         //add(txtId, BorderLayout.NORTH);
         
-       ControlCollection crc = new ControlCollection();
+       crc = new ControlCollection();
        
 	   btnSearch.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent evt){
 				
 				String id = txtId.getText().trim();
 				
+				for(int i=0 ; i<idArray.length ; i++){
+					if(id.equals(idArray[i])){
+					JOptionPane.showMessageDialog(null, "This ID Already Exits ,\n Please Enter new ID." );
+						
+						return;
+					}
+				}
+				addToIdArray(id);
+				
+				
+				
+				
+				//GetId[] idexits = new GetID[0];
+				//
+				//GetId[] temp=new GetId[idexits.length+1];
+				//for (int i = 0; i < idexits.length; i++){
+				//	temp[i]=idexits[i];
+				//}
+				//idexits=temp;
+				//idexits[idexits.length-1] = id;
+				//
 				
 				if(id.isEmpty()){
 					
@@ -66,7 +99,7 @@ class Controlroom extends JFrame{
 					
 						JOptionPane.showMessageDialog(null, "Added Successfully");
 						
-						int count = id.length();			
+						//int count = id.length();			
 						String findId = id.substring(0,2);
 						
 						if(findId.equals("A0")){

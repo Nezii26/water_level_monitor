@@ -22,7 +22,7 @@ class ControlCollection{
 	public void setWaterLevel(int waterLevel) {
         this.waterLevel = waterLevel;
 		for (WaterLevelObserver obs : waterLevelObserverArray) {
-        obs.update(this.waterLevel);
+			obs.update(this.waterLevel);
     
 		}
 	}

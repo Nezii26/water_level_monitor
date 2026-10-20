@@ -9,18 +9,20 @@ class Display extends WaterLevelObserver {
 
     private JFrame frame;
     private JPanel panel;
+    static int y=0;
 
     Display(String id){
         this.id = id;
-		
+			y=y+100;
        
         
             frame = new JFrame("Display");
             frame.setSize(300, 150);
             frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-            frame.setLocation(400, 100);
+            frame.setLocation(400, y);
 
             panel = new JPanel(new GridLayout(0, 1, 5, 5));
+            panel.setBackground(new Color(137, 207, 240));
             frame.add(panel);
         
 
@@ -37,15 +39,6 @@ class Display extends WaterLevelObserver {
     public void update(int waterLevel) {
         lblDisplay.setText(id+"-->Water Level : "+waterLevel);
         
-        if (waterLevel <= 25) {
-			panel.setBackground(new Color(76, 175, 80)); // Green
-		}else if(25 < waterLevel && waterLevel <= 50){
-			panel.setBackground(new Color(255, 235, 59)); // Yellow
-		}else if(50 < waterLevel && waterLevel <= 75){
-			panel.setBackground(new Color(255, 152, 0)); // Orange
-		}else if(75 < waterLevel && waterLevel <= 100){
-			panel.setBackground(new Color(244, 67, 54)); // Red
-		}
         
     }
 
